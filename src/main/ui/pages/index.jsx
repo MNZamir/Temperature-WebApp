@@ -50,12 +50,12 @@ export default function Home() {
             _hover={{
               bg: 'blue.500',
             }}>
-              <Link href="signIn">
+              <Link href="account/login">
                 Sign in
               </Link>
           </Button>
           <Button rounded={'full'}>
-            <Link href="registration">
+            <Link href="account/register">
               New User
             </Link>
           </Button>

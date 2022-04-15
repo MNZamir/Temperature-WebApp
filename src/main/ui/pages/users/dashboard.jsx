@@ -5,6 +5,7 @@ export default function Dashboard() {
     return <Heading>This is a Dashboard (supposely - in development..... please be calm)</Heading>
 }
 
-export async function getServerSideProps() {
-    const session = await getSession()
-}
+// export async function getServerSideProps() {
+
+    // const session = await getSession()
+// }

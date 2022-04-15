@@ -1,30 +1,29 @@
 import {
     Button,
     FormControl,
-    Flex,
     Heading,
     Input,
     Stack,
     Text,
     useColorModeValue,
   } from '@chakra-ui/react';
-  
-  export default function ForgotPasswordForm() {
+
+import { useForm } from 'react-hook-form';  
+
+export default function ResetForm() {
+    const { 
+        register, 
+        handleSubmit,
+        formState: { errors, isSubmitting },
+      } = useForm();
+      
+    const onSubmit = async values => {
+        
+        // function will run after input validation success
+    }
+
     return (
-      <Flex
-        minH={'100vh'}
-        align={'center'}
-        justify={'center'}
-        bg={useColorModeValue('gray.50', 'gray.800')}>
-        <Stack
-          spacing={4}
-          w={'full'}
-          maxW={'md'}
-          bg={useColorModeValue('white', 'gray.700')}
-          rounded={'xl'}
-          boxShadow={'lg'}
-          p={6}
-          my={12}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Heading lineHeight={1.1} fontSize={{ base: '2xl', md: '3xl' }}>
             Forgot your password?
           </Heading>
@@ -33,12 +32,20 @@ import {
             color={useColorModeValue('gray.800', 'gray.400')}>
             You&apos;ll get an email with a reset link
           </Text>
-          <FormControl id="email">
+          <FormControl id="email" isInvalid={errors.email}>
             <Input
               placeholder="your-email@example.com"
               _placeholder={{ color: 'gray.500' }}
               type="email"
+              id='email'
+              {
+                  ...register("email",
+                  {
+                      required: true,
+                  })
+              }
             />
+            {errors.email && "Email is required"}
           </FormControl>
           <Stack spacing={6}>
             <Button
@@ -46,11 +53,13 @@ import {
               color={'white'}
               _hover={{
                 bg: 'blue.500',
-              }}>
+              }}
+              type='submit'
+              isLoading={isSubmitting}
+              >
               Request Reset
             </Button>
-          </Stack>
-        </Stack>
-      </Flex>
+          </Stack>            
+        </form>
     );
-  }
+}
