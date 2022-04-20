@@ -15,6 +15,9 @@ import { useForm } from 'react-hook-form';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 
 import { useState } from 'react';
+import { common } from 'const';
+import axios from 'axios';
+const baseUrl = common.apiURL;
 
 export default function RegistrationForm() {
     const [showPassword, setShowPassword] = useState(false);
@@ -25,8 +28,19 @@ export default function RegistrationForm() {
         formState: { errors, isSubmitting },
     } = useForm();
 
-    const onSubmit = async values => {
-        
+    const onSubmit = async data => {
+      console.log(JSON.stringify(data))
+
+        await axios.post(baseUrl + '/api/v1/registration', JSON.stringify(data), {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then((response) => {
+          console.log(response);
+        }, (error) => {
+          console.log(error);
+        });
         // function will run after input validation success
     }
 
