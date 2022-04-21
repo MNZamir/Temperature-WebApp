@@ -16,11 +16,14 @@ import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 
 import { useState } from 'react';
 import { common } from 'const';
+import { useRouter } from 'next/router';
 import axios from 'axios';
 const baseUrl = common.apiURL;
 
 export default function RegistrationForm() {
     const [showPassword, setShowPassword] = useState(false);
+    const [error, setError] = useState("");
+    const router = useRouter();
 
     const {
         register,
@@ -29,20 +32,17 @@ export default function RegistrationForm() {
     } = useForm();
 
     const onSubmit = async data => {
-      console.log(JSON.stringify(data))
 
-        await axios.post(baseUrl + '/api/v1/registration', JSON.stringify(data), {
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
+        await axios.post(baseUrl + '/api/v1/registration', data)
         .then((response) => {
-          console.log(response);
+          router.push('/account/login');
         }, (error) => {
-          console.log(error);
+          console.log(error.response.data.message);
+          setError({ error: error.response.data.message});
         });
         // function will run after input validation success
     }
+    console.log(error.error);
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -130,6 +130,7 @@ export default function RegistrationForm() {
                   Sign up
                 </Button>
               </Stack>
+              { error ? error.error : ""}
               <Stack pt={6}>
                 <Text align={'center'}>
                   Already a user? <Link href='login' color={'blue.400'}>Login</Link>

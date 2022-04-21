@@ -21,23 +21,6 @@ public class EmailService implements EmailSender{
     private final static Logger LOGGER = LoggerFactory
             .getLogger(EmailService.class);
 
-//    @Override
-//    @Async
-//    public void send(String to, String email) {
-//        try {
-//            MimeMessage mimeMessage = mailSender.createMimeMessage();
-//            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
-//            helper.setText(email, true);
-//            helper.setTo(to);
-//            helper.setSubject("Confirm your email");
-//            helper.setFrom("hello@clonelyguy.com");
-//            mailSender.send(mimeMessage);
-//        } catch (MessagingException e) {
-//            LOGGER.error("Failed to send email", e);
-//            throw new IllegalStateException("Failed to send email");
-//        }
-//    }
-
     @Override
     @Async
     public void send(String to, String email) {
@@ -54,15 +37,4 @@ public class EmailService implements EmailSender{
         }
     }
 
-//    public void send(String toEmail, String subject, String body) {
-//        SimpleMailMessage message = new SimpleMailMessage();
-//        message.setFrom("hello@aztech.com");
-//        message.setTo(toEmail);
-//        message.setText(body);
-//        message.setSubject(subject);
-//
-//        mailSender.send(message);
-//
-//        System.out.println("Mail sent successfully.....");
-//    }
 }
