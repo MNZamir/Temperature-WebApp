@@ -35,7 +35,7 @@ export default function RegistrationForm() {
 
         await axios.post(baseUrl + '/api/v1/registration', data)
         .then((response) => {
-          router.push('/account/login');
+          router.push('/account/email-confirmation');
         }, (error) => {
           console.log(error.response.data.message);
           setError({ error: error.response.data.message});
