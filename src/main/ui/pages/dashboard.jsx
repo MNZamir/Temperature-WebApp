@@ -69,7 +69,7 @@ export default function Dashboard() {
                         </Flex>
                     </Flex>
                     <Flex flexDir="column" alignItems="center" mb={10} mt={5}>
-                        <Avatar my={2} src="avatar-1.jpg" />
+                        <Avatar my={2} src="" />
                         <Text textAlign="center">User</Text>
                     </Flex>
                 </Flex>
