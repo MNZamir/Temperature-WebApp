@@ -1,6 +1,6 @@
-package com.example.java.registration.token;
+package com.example.java.data.models;
 
-import com.example.java.appuser.AppUser;
+import com.example.java.data.models.AppUser;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

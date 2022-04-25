@@ -1,4 +1,4 @@
-package com.example.java.registration;
+package com.example.java.data.payloads.request;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

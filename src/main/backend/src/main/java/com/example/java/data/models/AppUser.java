@@ -1,4 +1,4 @@
-package com.example.java.appuser;
+package com.example.java.data.models;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -12,11 +12,19 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
 
+import static javax.persistence.GenerationType.*;
+
 @Getter
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
-@Entity
+@Entity(name = "AppUser")
+@Table(
+        name = "app_user",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "user_email_unique", columnNames = "email")
+        }
+)
 
 public class AppUser implements UserDetails {
 
@@ -27,14 +35,39 @@ public class AppUser implements UserDetails {
     )
     @Id
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
+            strategy = SEQUENCE,
             generator = "user_sequence"
     )
+    @Column(
+            name = "id",
+            updatable = false
+    )
     private Long id;
+
+    @Column(
+            name = "first_name",
+            columnDefinition = "TEXT"
+    )
     private String firstName;
+
+    @Column(
+            name = "last_name",
+            columnDefinition = "TEXT"
+    )
     private String lastName;
+
+    @Column(
+            name = "password",
+            nullable = false
+    )
     private String password;
+
+    @Column(
+            name = "email",
+            nullable = false
+    )
     private String email;
+
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
     private Boolean locked = false;
@@ -66,14 +99,6 @@ public class AppUser implements UserDetails {
     @Override
     public String getUsername() {
         return email;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
     }
 
     @Override

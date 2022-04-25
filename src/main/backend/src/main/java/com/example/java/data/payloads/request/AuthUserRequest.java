@@ -1,4 +1,4 @@
-package com.example.java.authentication;
+package com.example.java.data.payloads.request;
 
 import lombok.*;
 

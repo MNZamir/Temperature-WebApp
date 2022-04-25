@@ -1,12 +1,12 @@
-package com.example.java.registration;
+package com.example.java.service;
 
-import com.example.java.appuser.AppUser;
-import com.example.java.appuser.AppUserRole;
-import com.example.java.appuser.AppUserService;
+import com.example.java.data.models.AppUser;
+import com.example.java.data.models.AppUserRole;
+import com.example.java.data.payloads.request.RegistrationRequest;
 import com.example.java.email.EmailSender;
 import com.example.java.email.EmailService;
-import com.example.java.registration.token.ConfirmationToken;
-import com.example.java.registration.token.ConfirmationTokenService;
+import com.example.java.data.models.ConfirmationToken;
+import com.example.java.service.email.EmailValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

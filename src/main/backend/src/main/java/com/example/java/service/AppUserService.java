@@ -1,7 +1,8 @@
-package com.example.java.appuser;
+package com.example.java.service;
 
-import com.example.java.registration.token.ConfirmationToken;
-import com.example.java.registration.token.ConfirmationTokenService;
+import com.example.java.data.models.AppUser;
+import com.example.java.data.repository.AppUserRepository;
+import com.example.java.data.models.ConfirmationToken;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -59,5 +60,9 @@ public class AppUserService implements UserDetailsService {
 
     public int enableAppUser(String email) {
         return appUserRepository.enableAppUser(email);
+    }
+
+    public List<AppUser> getAllUsers() {
+        return appUserRepository.findAll();
     }
 }
