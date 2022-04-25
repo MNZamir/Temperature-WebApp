@@ -7,10 +7,19 @@ import {
     Link,
     Button,
   } from '@chakra-ui/react';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { getCookies, setCookies } from 'cookies-next';
+
+import http from "../http-common";
 
 import { useForm } from 'react-hook-form';
 
 export default function LoginForm() {
+    const [error, setError] = useState("");
+    getCookies();
+    const router = useRouter();
+
     const { 
         register, 
         handleSubmit,
@@ -18,10 +27,18 @@ export default function LoginForm() {
       } = useForm();
       
     const onSubmit = async values => {
-        
+        await http.get("/api/v1/user/" + values.email)
+        .then((response) => {
+          console.log(response.data);
+          setCookies('username', values.email );
+          router.push('/dashboard');
+        }, (error) => {
+          console.log(error.response.data.message);
+          setError(error.response.data.message);
+        });
         // function will run after input validation success
     }
-
+    // console.log(getCookie('username'))
     return (
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <FormControl id="email" isInvalid={errors.email}>
@@ -51,7 +68,7 @@ export default function LoginForm() {
                       direction={{ base: 'column', sm: 'row' }}
                       align={'start'}
                       justify={'space-between'}>
-                      <Checkbox>Remember me</Checkbox>
+                      {/* <Checkbox>Remember me</Checkbox> */}
                       <Link href='forgotPassword' color={'blue.400'}>Forgot password?</Link>
                     </Stack>
                     <Button
