@@ -19,7 +19,7 @@ import {
 } from '@chakra-ui/react'
 import { FaHome, FaFileUpload } from "react-icons/fa";
 import { FileUploader } from "react-drag-drop-files";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import uploadFilesService from 'services/upload-files.service';
 
 const fileTypes = ["CSV"];
@@ -27,10 +27,14 @@ const fileTypes = ["CSV"];
 export default function FileUpload() {
 
     const [file, setFile] = useState(null);
-    const [value, setValue] = useState("");
+    const [message, setMessage] = useState("");
     const handleChange = (file) => {
       setFile(file);
     };
+
+    useEffect(() => {
+        uploadFilesService.getFiles();
+    });
 
     // const handleSubmit = (event) => {
     //     console.log(event);
@@ -46,7 +50,10 @@ export default function FileUpload() {
     //   };
 
     const handleUpload = () => {
-        uploadFilesService.upload(file);
+        uploadFilesService.upload(file, (event) => {
+            console.log("NEED TO PROCESS THING")
+        })
+        .then
     }
 
       console.log(file) // component file uupload
@@ -109,7 +116,7 @@ export default function FileUpload() {
                         </Flex>
                     </Flex>
                     <Flex flexDir="column" alignItems="center" mb={10} mt={5}>
-                        <Avatar my={2} src="avatar-1.jpg" />
+                        <Avatar my={2} src="" />
                         <Text textAlign="center">User</Text>
                     </Flex>
                 </Flex>
