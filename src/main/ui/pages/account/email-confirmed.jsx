@@ -9,9 +9,8 @@ import {
   } from '@chakra-ui/react';
   import { useRouter } from 'next/router'
   import { useState, useEffect } from 'react'
-  import { common } from 'const';
-  import axios from 'axios';
-  const baseUrl = common.apiURL;  
+  import http from "../http-common";
+
   
   export default function EmailConfirmed() {
     const { query } = useRouter()
@@ -22,12 +21,12 @@ import {
     const confirmEmail = async e => {
         
         if(query.token != null || query.token != undefined) {
-            await axios.get(baseUrl + "/api/v1/registration/confirm?token=" + query.token)
+            await http.get(baseUrl + "/api/v1/registration/confirm?token=" + query.token)
             .then((response) => {
                 console.log(response.data);
                 setSuccess(response.data)
                 toast({
-                    title: 'Account created.',
+                    title: 'Account verified.',
                     description: "We've created your account for you. This window will be automatically close after 5 seconds",
                     status: 'success',
                     duration: 9000,
@@ -69,7 +68,7 @@ import {
             <Text
               fontSize={{ base: 'sm', sm: 'md' }}
               color={useColorModeValue('gray.800', 'gray.400')}>
-              Do you want to confirm your email?
+              Verify your email?
             </Text>
             <Stack spacing={6}>
                 <Button
@@ -79,7 +78,7 @@ import {
                   _hover={{
                     bg: 'blue.500',
                   }}>
-                  Confirm email
+                  Verify email
                 </Button>
             </Stack>
         </Stack>
