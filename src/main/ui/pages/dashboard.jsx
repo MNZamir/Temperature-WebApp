@@ -8,7 +8,7 @@ import {
     Link
 } from '@chakra-ui/react'
 import MyChart from '../components/MyChart'
-import { FaHome } from "react-icons/fa";
+import { FaHome, FaFileUpload } from "react-icons/fa";
 
 export default function Dashboard() {
     return (
@@ -42,7 +42,7 @@ export default function Dashboard() {
                             alignSelf="center"
                             letterSpacing="tight"
                         >
-                            °Celsius
+                            °Temperature App
                         </Heading>
                         <Flex
                             flexDir={["row", "row", "column", "column", "column"]}
@@ -55,7 +55,15 @@ export default function Dashboard() {
                                     <FaHome />
                                 </Link>
                                 <Link _hover={{ textDecor: 'none' }} display={["flex", "flex", "none", "flex", "flex"]}>
-                                    <Text className="active">Home</Text>
+                                    <Text className="active">Dashboard</Text>
+                                </Link>
+                            </Flex>
+                            <Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
+                                <Link display={["none", "none", "flex", "flex", "flex"]}>
+                                    <FaFileUpload />
+                                </Link>
+                                <Link _hover={{ textDecor: 'none' }} display={["flex", "flex", "none", "flex", "flex"]}>
+                                    <Text className="active">Upload File</Text>
                                 </Link>
                             </Flex>
                         </Flex>
