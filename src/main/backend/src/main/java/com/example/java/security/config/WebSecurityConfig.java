@@ -1,6 +1,6 @@
 package com.example.java.security.config;
 
-import com.example.java.appuser.AppUserService;
+import com.example.java.service.AppUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,13 +22,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/api/v*/registration/**").permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .formLogin();
+                .csrf().disable();
+//                .authorizeRequests()
+//                .antMatchers("/api/v*/registration/**").permitAll()
+//                .antMatchers("/api/v*/**").permitAll()
+//                .antMatchers("/api/v*/user/**").permitAll()
+//                .anyRequest()
+//                .authenticated()
+//                .and()
+//                .formLogin();
     }
 
     @Override
