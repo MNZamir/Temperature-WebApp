@@ -1,10 +1,6 @@
 package com.example.java.data.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.Data;
 import lombok.Getter;
@@ -29,5 +25,12 @@ public class FileEntity {
 
     @Lob
     private byte[] data;
+
+    @ManyToOne
+    @JoinColumn(
+            name = "app_user_id",
+            nullable = false
+    )
+    private AppUser appUser;
 
 }
