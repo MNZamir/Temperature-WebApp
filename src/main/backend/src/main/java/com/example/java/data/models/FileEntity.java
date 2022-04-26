@@ -13,7 +13,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Data
 @Entity
-@Table(name = "FILES")
+@Table(name = "files")
 public class FileEntity {
 
     @Id
