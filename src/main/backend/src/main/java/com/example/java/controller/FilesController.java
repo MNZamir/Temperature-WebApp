@@ -7,9 +7,11 @@ import java.io.Reader;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import com.example.java.data.models.AppUser;
 import com.example.java.data.models.Device;
 import com.example.java.data.models.FileEntity;
 import com.example.java.data.payloads.response.FileResponse;
+import com.example.java.data.repository.AppUserRepository;
 import com.example.java.service.FileService;
 import com.opencsv.CSVReader;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +30,16 @@ public class FilesController {
 
     private final FileService fileService;
 
+    private final AppUserRepository appUserRepository;
+
     @Autowired
-    public FilesController(FileService fileService) {
+    public FilesController(FileService fileService, AppUserRepository appUserRepository) {
         this.fileService = fileService;
+        this.appUserRepository = appUserRepository;
     }
 
+
+//    JUST FOR TESTING PURPOSE. CANNOT USE YET
     @PostMapping(path = "/convert")
     public void readCSV(@RequestParam("file") MultipartFile file) throws Exception {
         try {
@@ -58,8 +65,10 @@ public class FilesController {
 
     @PostMapping
     public ResponseEntity<String> upload(@RequestParam("file") MultipartFile file) {
+        String email = "zamiramiludin@gmail.com";
         try {
-            fileService.save(file);
+            AppUser userObject = appUserRepository.findByEmail(email).get();
+            fileService.save(file, userObject);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(String.format("File uploaded successfully: %s", file.getOriginalFilename()));
         } catch (Exception e) {
