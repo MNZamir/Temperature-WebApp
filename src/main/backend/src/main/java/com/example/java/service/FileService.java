@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.java.data.models.AppUser;
 import com.example.java.data.models.FileEntity;
 import com.example.java.data.repository.FileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,13 @@ public class FileService {
         this.fileRepository = fileRepository;
     }
 
-    public void save(MultipartFile file) throws IOException {
+    public void save(MultipartFile file, AppUser appUser) throws IOException {
         FileEntity fileEntity = new FileEntity();
         fileEntity.setName(StringUtils.cleanPath(file.getOriginalFilename()));
         fileEntity.setContentType(file.getContentType());
         fileEntity.setData(file.getBytes());
         fileEntity.setSize(file.getSize());
+        fileEntity.setAppUser(appUser);
 
         fileRepository.save(fileEntity);
     }
