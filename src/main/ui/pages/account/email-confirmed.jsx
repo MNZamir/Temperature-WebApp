@@ -21,7 +21,7 @@ import {
     const confirmEmail = async e => {
         
         if(query.token != null || query.token != undefined) {
-            await http.get(baseUrl + "/api/v1/registration/confirm?token=" + query.token)
+            await http.get("/api/v1/registration/confirm?token=" + query.token)
             .then((response) => {
                 console.log(response.data);
                 setSuccess(response.data)
