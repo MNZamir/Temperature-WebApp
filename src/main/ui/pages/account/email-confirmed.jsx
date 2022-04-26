@@ -9,7 +9,7 @@ import {
   } from '@chakra-ui/react';
   import { useRouter } from 'next/router'
   import { useState, useEffect } from 'react'
-  import http from "../http-common";
+  import http from '../../http-common'
 
   
   export default function EmailConfirmed() {
