@@ -1,13 +1,12 @@
 package com.example.java.data.repository;
 
-import com.example.java.data.models.Device;
+import com.example.java.data.models.TempData;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
-import java.util.Optional;
 
 @Repository
 @Transactional
-public interface DeviceRepository extends JpaRepository<Device, String> {
+public interface TempDataRepository extends JpaRepository<TempData, Long> {
 }
