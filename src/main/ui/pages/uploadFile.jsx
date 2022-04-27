@@ -17,20 +17,22 @@ import {
     Button,
     Box
 } from '@chakra-ui/react'
-import { FaHome, FaFileUpload } from "react-icons/fa";
+import { FaHome, FaFileUpload, FaTabletAlt  } from "react-icons/fa";
 import { FileUploader } from "react-drag-drop-files";
 import React, { useState, useEffect } from "react";
 import uploadFilesService from 'services/upload-files.service';
+import FileTable from 'components/FileTable';
 
 const fileTypes = ["CSV"];
 
 export default function FileUpload() {
-
     const [file, setFile] = useState(null);
     const [message, setMessage] = useState("");
     const handleChange = (file) => {
       setFile(file);
     };
+
+    
 
     useEffect(() => {
         uploadFilesService.getFiles();
@@ -101,7 +103,7 @@ export default function FileUpload() {
                                 <Link display={["none", "none", "flex", "flex", "flex"]}>
                                     <FaHome />
                                 </Link>
-                                <Link _hover={{ textDecor: 'none' }} display={["flex", "flex", "none", "flex", "flex"]}>
+                                <Link _hover={{ textDecor: 'none' }} display={["flex", "flex", "none", "flex", "flex"]} href='dashboard'>
                                     <Text className="active">Dashboard</Text>
                                 </Link>
                             </Flex>
@@ -109,8 +111,16 @@ export default function FileUpload() {
                                 <Link display={["none", "none", "flex", "flex", "flex"]}>
                                     <FaFileUpload />
                                 </Link>
-                                <Link _hover={{ textDecor: 'none' }} display={["flex", "flex", "none", "flex", "flex"]}>
+                                <Link _hover={{ textDecor: 'none' }} display={["flex", "flex", "none", "flex", "flex"]} href='uploadFile'>
                                     <Text className="active">Upload File</Text>
+                                </Link>
+                            </Flex>
+                            <Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
+                                <Link display={["none", "none", "flex", "flex", "flex"]}>
+                                    <FaTabletAlt />
+                                </Link>
+                                <Link _hover={{ textDecor: 'none' }} display={["flex", "flex", "none", "flex", "flex"]} href='devices'>
+                                    <Text className="active">Devices</Text>
                                 </Link>
                             </Flex>
                         </Flex>
@@ -145,39 +155,9 @@ export default function FileUpload() {
                 <Box>
                     <Button onClick={handleUpload}>Upload</Button>
                 </Box>
-{/*                 
-                        <form  onSubmit={handleSubmit}>
-                        <label>
-                            Name:
-                            <input type="file" name="name" onChange={onFileChange} />
-                        </label>
-                        <input type="submit" value="Submit" />
-                        </form>                 */}
-                <TableContainer>
-                <Table variant='simple'>
-                    <TableCaption>Imperial to metric conversion factors</TableCaption>
-                    <Thead>
-                    <Tr>
-                        <Th>NO.</Th>
-                        <Th>File name</Th>
-                    </Tr>
-                    </Thead>
-                    <Tbody>
-                    <Tr>
-                        <Td>1</Td>
-                        <Td>millimetres.csv</Td>
-                    </Tr>
-                    <Tr>
-                        <Td>2</Td>
-                        <Td>centimetres.csv</Td>
-                    </Tr>
-                    <Tr>
-                        <Td>3</Td>
-                        <Td>metres.csv</Td>
-                    </Tr>
-                    </Tbody>
-                </Table>
-                </TableContainer>
+                <br />
+                <Heading>File Uploaded</Heading>
+                <FileTable />           
             </Flex>
         </Flex>
     );
