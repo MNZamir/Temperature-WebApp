@@ -6,16 +6,23 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.ArrayList;
 
+import static javax.persistence.GenerationType.*;
+
 @Data
 @Entity
 @Table(name = "temp_record")
 public class TempData {
 
     @Id
+    @GeneratedValue
     private Long id;
 
     private String type;
+
+    @Column(nullable = false)
     private Long epoch;
+
+    @Column(nullable = false)
     private Double temp;
 
     @ManyToOne
