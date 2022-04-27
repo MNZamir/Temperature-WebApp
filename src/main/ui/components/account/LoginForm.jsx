@@ -27,15 +27,16 @@ export default function LoginForm() {
       } = useForm();
       
     const onSubmit = async values => {
-        await http.get("/api/v1/user/" + values.email)
-        .then((response) => {
-          console.log(response.data);
-          setCookies('username', values.email );
-          router.push('/dashboard');
-        }, (error) => {
-          console.log(error.response.data.message);
-          setError(error.response.data.message);
-        });
+        console.log(values)
+        // await http.post("/api/v1/user/" + values.email)
+        // .then((response) => {
+        //   console.log(response.data);
+        //   setCookies('username', values.email );
+        //   router.push('/dashboard');
+        // }, (error) => {
+        //   console.log(error.response.data.message);
+        //   setError(error.response.data.message);
+        // });
         // function will run after input validation success
     }
     // console.log(getCookie('username'))
