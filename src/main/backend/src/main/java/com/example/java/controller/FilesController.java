@@ -39,7 +39,6 @@ public class FilesController {
             AppUser userObject = appUserRepository.findByEmail(email).get();
 
             fileService.getCSVData(file, userObject);
-
             fileService.save(file, userObject);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(String.format("File uploaded successfully: %s", file.getOriginalFilename()));

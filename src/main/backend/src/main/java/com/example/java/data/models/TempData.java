@@ -35,7 +35,7 @@ public class TempData {
 
     public TempData(ArrayList<String> recordArray, Device device) {
         this.type = recordArray.get(1);
-        this.epoch = Long.valueOf(recordArray.get(2));
+        this.epoch = Long.valueOf(String.format("%.0f", Double.parseDouble(recordArray.get(2))));
         this.temp = Double.valueOf(recordArray.get(3));
         this.device = device;
     }
