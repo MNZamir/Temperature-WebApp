@@ -1,18 +1,24 @@
 package com.example.java.data.models;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "device")
 public class Device {
 
     @Id
-    private String id;
+    @GeneratedValue
+    private Long id;
+
+    @Column(nullable = false)
+    private String uuid;
 
     @ManyToOne
     @JoinColumn(
@@ -21,8 +27,8 @@ public class Device {
     )
     private AppUser appUser;
 
-    public Device(String id, AppUser user) {
-        this.id = id;
+    public Device(String deviceId, AppUser user) {
+        this.uuid = deviceId;
         this.appUser = user;
     }
 }
