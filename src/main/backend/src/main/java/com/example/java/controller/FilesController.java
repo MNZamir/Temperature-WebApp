@@ -1,19 +1,13 @@
 package com.example.java.controller;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import com.example.java.data.models.AppUser;
-import com.example.java.data.models.Device;
 import com.example.java.data.models.FileEntity;
 import com.example.java.data.payloads.response.FileResponse;
 import com.example.java.data.repository.AppUserRepository;
 import com.example.java.service.FileService;
-import com.opencsv.CSVReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -38,36 +32,14 @@ public class FilesController {
         this.appUserRepository = appUserRepository;
     }
 
-
-//    JUST FOR TESTING PURPOSE. CANNOT USE YET
-    @PostMapping(path = "/convert")
-    public void readCSV(@RequestParam("file") MultipartFile file) throws Exception {
-        try {
-            Reader reader = new InputStreamReader(file.getInputStream());
-            CSVReader csvReader = new CSVReader(reader);
-            String[] records;
-
-            while ((records = csvReader.readNext()) != null) {
-
-                ArrayList<String> recordArray = new ArrayList<>(Arrays.asList(records));
-                recordArray.removeAll(Collections.singleton(""));
-                recordArray.removeAll(Collections.singleton(null));
-
-                Device device = new Device();
-
-            }
-//            return ResponseEntity.status(HttpStatus.OK).body(csvReader.readAll().toString());
-        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-        }
-
-    }
-
     @PostMapping
     public ResponseEntity<String> upload(@RequestParam("file") MultipartFile file) {
         String email = "zamiramiludin@gmail.com";
         try {
             AppUser userObject = appUserRepository.findByEmail(email).get();
+
+            fileService.getCSVData(file, userObject);
+
             fileService.save(file, userObject);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(String.format("File uploaded successfully: %s", file.getOriginalFilename()));
