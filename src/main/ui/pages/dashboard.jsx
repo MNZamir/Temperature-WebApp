@@ -8,7 +8,8 @@ import {
     Link
 } from '@chakra-ui/react'
 import MyChart from '../components/MyChart'
-import { FaHome, FaFileUpload } from "react-icons/fa";
+import { FaHome, FaFileUpload, FaTabletAlt  } from "react-icons/fa";
+import DataTable from 'components/DataTable';
 
 export default function Dashboard() {
     return (
@@ -54,7 +55,7 @@ export default function Dashboard() {
                                 <Link display={["none", "none", "flex", "flex", "flex"]}>
                                     <FaHome />
                                 </Link>
-                                <Link _hover={{ textDecor: 'none' }} display={["flex", "flex", "none", "flex", "flex"]}>
+                                <Link _hover={{ textDecor: 'none' }} display={["flex", "flex", "none", "flex", "flex"]} href='dashboard'>
                                     <Text className="active">Dashboard</Text>
                                 </Link>
                             </Flex>
@@ -62,8 +63,16 @@ export default function Dashboard() {
                                 <Link display={["none", "none", "flex", "flex", "flex"]}>
                                     <FaFileUpload />
                                 </Link>
-                                <Link _hover={{ textDecor: 'none' }} display={["flex", "flex", "none", "flex", "flex"]}>
+                                <Link _hover={{ textDecor: 'none' }} display={["flex", "flex", "none", "flex", "flex"]} href='uploadFile'>
                                     <Text className="active">Upload File</Text>
+                                </Link>
+                            </Flex>
+                            <Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
+                                <Link display={["none", "none", "flex", "flex", "flex"]}>
+                                    <FaTabletAlt />
+                                </Link>
+                                <Link _hover={{ textDecor: 'none' }} display={["flex", "flex", "none", "flex", "flex"]} href='devices'>
+                                    <Text className="active">Devices</Text>
                                 </Link>
                             </Flex>
                         </Flex>
@@ -90,7 +99,8 @@ export default function Dashboard() {
                 >
                     Welcome back, <Flex display="inline-flex" fontWeight="bold">User</Flex>
                 </Heading>
-                <MyChart />
+
+                <DataTable />
             </Flex>
         </Flex>
     );
