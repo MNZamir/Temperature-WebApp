@@ -16,7 +16,7 @@ import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import http from "../http-common";
+import http from "../../http-common";
 
 
 export default function RegistrationForm() {

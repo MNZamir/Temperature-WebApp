@@ -11,7 +11,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { getCookies, setCookies } from 'cookies-next';
 
-import http from "../http-common";
+import http from "../../http-common";
 
 import { useForm } from 'react-hook-form';
 
