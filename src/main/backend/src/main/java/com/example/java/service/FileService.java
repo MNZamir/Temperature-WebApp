@@ -82,8 +82,15 @@ public class FileService {
                 device = deviceRepository.findByUuid(records.get(0));
             }
 
-            TempData tempData = new TempData(records, device);
-            tempDataRepository.save(tempData);
+            if (records.isEmpty() == false) {
+                TempData tempData = new TempData(records, device);
+                tempDataRepository.save(tempData);
+                System.out.println("Record is not empty");
+            } else {
+                System.out.println("Record is empty");
+            }
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
