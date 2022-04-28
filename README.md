@@ -18,6 +18,7 @@ Web application to analyse and predict temperature from devices for business.
 - JDK 1.8+
 - Embedded Tomcat, built into Spring Boot Starter Web
 - Node v8+
+- Maven
 
 Clone the project
 
